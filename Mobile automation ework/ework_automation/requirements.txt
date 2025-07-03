@@ -1,0 +1,4 @@
+pytest
+pytest-bdd
+appium-python-client
+selenium
