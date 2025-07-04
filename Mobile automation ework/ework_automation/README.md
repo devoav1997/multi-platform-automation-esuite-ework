@@ -21,7 +21,7 @@ Pastikan kamu sudah install berikut di Mac:
 1. **Clone repo**
 
     ```sh
-    git clone <url-repo-ini>
+    git clone https://github.com/devoav1997/multi-platform-automation-esuite-ework.git
     cd ework_automation
     ```
 

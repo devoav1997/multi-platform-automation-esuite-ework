@@ -17,12 +17,14 @@ Proyek ini adalah **automation testing** untuk [esuite.edot.id](https://esuite.e
 ESUITE_EDOT_BDD/
 ├── features/
 │   ├── steps/
-│   │   ├── step_create_company.py     # Step definition: create company (positive, negative, dan error form)
-│   │   └── step_oidc.py               # Step definition: OIDC login (positive & negative)
-│   ├── create_company.feature         # Feature file: skenario create company
-│   └── oidc_login.feature             # Feature file: skenario login OIDC
-├── venv/                              # Python virtualenv
-├── requirements.txt                   # Daftar dependensi
+│   │   ├── step_create_company.py         # Step: create company 
+│   │   ├── step_verify_company.py         # Step: verifikasi detail company (cek data benar di detail)
+│   │   ├── step_oidc.py                   # Step: OIDC login (positive & negative)
+│   ├── create_company.feature             # Feature: skenario create company
+│   ├── oidc_login.feature                 # Feature: skenario login OIDC
+│   └── verify_company_detail.feature      # Feature: verifikasi detail company yang sudah dibuat
+├── venv/                                  # Python virtualenv
+├── requirements.txt                       # Daftar dependensi
 ├── .gitignore
 └── README.md
 ```
@@ -34,7 +36,7 @@ ESUITE_EDOT_BDD/
 ### 1. **Clone repositori**
 
 ```bash
-git clone <url-repo-kamu>
+git clone https://github.com/devoav1997/multi-platform-automation-esuite-ework.git
 cd ESUITE_EDOT_BDD
 ```
 
@@ -49,7 +51,7 @@ rm -rf venv
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-
+```
 
 ### 3. **Jalankan Semua Test**
 
@@ -67,6 +69,12 @@ behave features/create_company.feature
 
 ```bash
 behave features/oidc_login.feature
+```
+
+### 6. **Jalankan Verify Company Detail**
+
+```bash
+behave features/verify_company_detail.feature
 ```
 
 ---
@@ -89,36 +97,53 @@ behave features/oidc_login.feature
 * Navigasi menu "Companies" setelah login
 * Klik "+ Add Company"
 * Isi form perusahaan dengan data random (Faker)
-* Dropdown akan otomatis menyesuaikan country:
+* Dropdown otomatis menyesuaikan country:
 
   * **Indonesia:** province, city, district, sub-district, postal code (input, bukan dropdown)
   * **Malaysia:** state, city, location, postal code (dropdown)
   * **Philippines:** region, province, city, barangay, postal code (input)
-* Cek dan isi **checkbox Policy & Terms** (custom, role=checkbox)
+* Cek dan isi **checkbox Policy & Terms**
 * Klik tombol Register
-* Validasi bahwa perusahaan yang baru dibuat muncul di daftar Companies
+* Validasi perusahaan yang baru dibuat muncul di daftar Companies
 
-### 3. **Validasi Error Otomatis**
+### 3. **Verify Company Detail**
+
+* **Tujuan:**
+  Memastikan seluruh data perusahaan yang telah diinput muncul **lengkap & benar** di halaman detail.
+* **Langkah utama:**
+
+  * Klik tombol "Manage" pada company yang baru dibuat
+  * Pastikan seluruh field (company name, industry type, company type, country, province, city, district, subdistrict, postal code, email, phone, address) **sesuai** dengan data saat pembuatan
+  * Handle jika data terpotong/ellipsis (misal: `Entertainment and Me...` tetap lolos asalkan mengandung expected value)
+* **Contoh Gherkin:**
+
+  ```gherkin
+  Scenario: Confirm that the inputted company data is displayed correctly
+    Given user is logged in to esuite
+    When user creates a new company with dummy data
+    Then user should see the new company listed on Companies page
+    And user can view company details and see all inputted data correctly
+  ```
+
+### 4. **Validasi Error Otomatis**
 
 * Jika terjadi error/validasi form (misal field required belum diisi), automation akan print pesan error yang muncul (jika ada) ke terminal.
 
 ---
 
-## 📝 Contoh Menjalankan Satu Skenario (Create Company)
+## 📝 Contoh Menjalankan Satu Skenario (Verify Company Detail)
 
 ```bash
-behave features/create_company.feature
+behave features/verify_company_detail.feature
 ```
 
 * **Step ini:**
 
   * Otomatis login ke aplikasi
-  * Navigasi ke menu "Companies"
   * Tambah company baru dengan data acak
-  * Isi seluruh field sesuai negara (Indonesia/Malaysia/Philippines)
   * Submit form
   * Verifikasi nama company muncul di list
-  * Jika form error, otomatis print pesan error yang muncul
+  * Buka detail company dan cek seluruh field **match** dengan data inputan
 
 ---
 
