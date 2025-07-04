@@ -1,7 +1,3 @@
-Tentu, berikut **README.md** yang sudah **diperbaiki** dan lebih jelas (step-by-step) untuk menjalankan automation **create company** di project-mu, plus penjelasan ringkas tentang tiap skenario:
-
----
-
 # 🧪 esuite.edot.id Pytest BDD Test
 
 ## 🚀 Behave (BDD) + Selenium WebDriver Automation for esuite.edot.id

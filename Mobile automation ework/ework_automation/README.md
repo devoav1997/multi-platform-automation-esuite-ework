@@ -1,9 +1,3 @@
-Tentu, berikut contoh **README.md** yang cocok untuk project automation mobile menggunakan **pytest + Appium + Python**.
-Bisa kamu copy langsung, nanti tinggal ganti detail app dan test jika mau.
-
----
-
-````markdown
 # Ework Mobile Automation Testing
 
 Automation testing untuk aplikasi **Ework** berbasis Android menggunakan **pytest** dan **Appium**.
