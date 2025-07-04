@@ -133,9 +133,5 @@ EWORK_AUTOMATION/
 
 ---
 
-## 📚 Referensi
 
-* [Appium Python Client](https://github.com/appium/python-client)
-* [Pytest Documentation](https://docs.pytest.org/)
-* [Appium Documentation](https://appium.io/docs/en/about-appium/intro/)
 
