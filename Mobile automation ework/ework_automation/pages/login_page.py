@@ -27,7 +27,6 @@ class LoginPage:
 
     def is_dashboard_displayed(self):
         try:
-            # Ganti sesuai element unik di dashboard (cek resource-id/title dashboard setelah login)
             WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((
                     AppiumBy.XPATH, '//*[contains(@text, "Dashboard") or contains(@text, "dashboard") or contains(@text, "Beranda")]'
